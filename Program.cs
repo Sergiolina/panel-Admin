@@ -10,4 +10,4 @@ var app = builder.Build();
 
 app.MapGet("/", () => "API del Panel Admin funcionando");
 
-app.Run();
+app.Run();// prueba de sincronizacion
