@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using panel_Admin;
 
+SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -10,4 +12,4 @@ var app = builder.Build();
 
 app.MapGet("/", () => "API del Panel Admin funcionando");
 
-app.Run();// hola
+app.Run();// funciona
