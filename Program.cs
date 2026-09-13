@@ -46,8 +46,11 @@ using (var scope = app.Services.CreateScope())
 
     await DbInitializer.InicializarAsync(context, passwordService);
 }
-app.UseAuthentication();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
