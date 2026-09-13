@@ -65,13 +65,19 @@
                     })
                 });
 
-                const datos = await respuesta.json();
+let datos;
 
-                if (!respuesta.ok) {
-                    mensaje.textContent =
-                        datos || "Usuario o contraseña incorrectos.";
+try {
+    datos = await respuesta.json();
+} catch {
+    datos = await respuesta.text();
+}
 
-                    return;
+if (!respuesta.ok) {
+    mensaje.textContent =
+        datos || "Usuario o contraseña incorrectos.";
+
+    return;
                 }
 
                 sessionStorage.setItem("token", datos.token);

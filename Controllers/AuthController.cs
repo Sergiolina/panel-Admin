@@ -32,7 +32,10 @@ public class AuthController : ControllerBase
 
         if (usuario == null)
         {
-            return Unauthorized("Usuario o contraseña incorrectos.");
+            return Unauthorized(new
+{
+    mensaje = "Usuario o contraseña incorrectos."
+});
         }
 
         var contraseñaCorrecta = _passwordService.VerificarPassword(
