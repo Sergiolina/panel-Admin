@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso — Panel Admin</title>
+</head>
+
+<body>
+
+    <main>
+        <h1>Panel Admin</h1>
+
+        <form id="loginForm">
+            <div>
+                <label for="nombreUsuario">Usuario</label>
+                <input
+                    type="text"
+                    id="nombreUsuario"
+                    name="nombreUsuario"
+                    required
+                    autocomplete="username">
+            </div>
+
+            <div>
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    autocomplete="current-password">
+            </div>
+
+            <button type="submit">Iniciar sesión</button>
+
+            <p id="mensaje"></p>
+        </form>
+    </main>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const mensaje = document.getElementById("mensaje");
+
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const nombreUsuario =
+                document.getElementById("nombreUsuario").value;
+
+            const password =
+                document.getElementById("password").value;
+
+            mensaje.textContent = "Iniciando sesión...";
+
+            try {
+                const respuesta = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nombreUsuario,
+                        password
+                    })
+                });
+
+                const datos = await respuesta.json();
+
+                if (!respuesta.ok) {
+                    mensaje.textContent =
+                        datos || "Usuario o contraseña incorrectos.";
+
+                    return;
+                }
+
+                sessionStorage.setItem("token", datos.token);
+
+                mensaje.textContent = "Login correcto.";
+
+                window.location.href = "/admin/index.html";
+            }
+            catch (error) {
+                console.error(error);
+                mensaje.textContent =
+                    "No se pudo conectar con el servidor.";
+            }
+        });
+    </script>
+
+</body>
+</html>
