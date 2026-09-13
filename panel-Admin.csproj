@@ -7,12 +7,14 @@
     <RootNamespace>panel_Admin</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.19">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.19" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.19" />
     <PackageReference Include="SQLitePCLRaw.provider.sqlite3" Version="2.1.6" />
   </ItemGroup>
 </Project>

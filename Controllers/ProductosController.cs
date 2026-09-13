@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace panel_Admin.Controllers;
 
@@ -22,6 +23,7 @@ public class ProductosController : ControllerBase
         return Ok(productos);
     }
 
+[Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> CrearProducto(Producto producto)
     {
@@ -43,6 +45,8 @@ public class ProductosController : ControllerBase
             new { id = producto.Id },
             producto);
     }
+
+[Authorize(Roles = "Admin")]
   [HttpPut("{id}")]
 public async Task<IActionResult> ActualizarProducto(int id, Producto producto)
 {
@@ -74,6 +78,8 @@ public async Task<IActionResult> ActualizarProducto(int id, Producto producto)
 
     return Ok(productoExistente);
 }
+
+[Authorize(Roles = "Admin")]
   [HttpDelete("{id}")]
 public async Task<IActionResult> EliminarProducto(int id)
 {
