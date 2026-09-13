@@ -74,4 +74,19 @@ public async Task<IActionResult> ActualizarProducto(int id, Producto producto)
 
     return Ok(productoExistente);
 }
+  [HttpDelete("{id}")]
+public async Task<IActionResult> EliminarProducto(int id)
+{
+    var producto = await _context.Productos.FindAsync(id);
+
+    if (producto == null)
+    {
+        return NotFound("Producto no encontrado.");
+    }
+
+    _context.Productos.Remove(producto);
+    await _context.SaveChangesAsync();
+
+    return NoContent();
+}
 }
