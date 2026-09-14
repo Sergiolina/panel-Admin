@@ -46,16 +46,9 @@ using (var scope = app.Services.CreateScope())
 
     await DbInitializer.InicializarAsync(context, passwordService);
 }
-<<<<<<< Updated upstream
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-=======
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
->>>>>>> Stashed changes
 app.UseAuthentication();
 app.UseAuthorization();
 
