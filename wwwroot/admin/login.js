@@ -35,10 +35,10 @@ try {
 
 if (!respuesta.ok) {
     mensaje.textContent =
-        datos || "Usuario o contraseña incorrectos.";
+        datos.mensaje || datos || "Usuario o contraseña incorrectos.";
 
     return;
-                }
+}
 
                 sessionStorage.setItem("token", datos.token);
 
