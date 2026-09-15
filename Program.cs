@@ -12,6 +12,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Catalogo", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -50,6 +61,9 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseAuthentication();
+
+app.UseCors("Catalogo");
+
 app.UseAuthorization();
 
 app.MapControllers();
