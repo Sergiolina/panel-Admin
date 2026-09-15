@@ -33,11 +33,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
 
-            ValidIssuer = "panel-admin",
-            ValidAudience = "panel-admin",
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
 
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes("CLAVE-TEMPORAL-NO-PARA-PRODUCCION"))
+            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
 
