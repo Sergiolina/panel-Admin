@@ -15,13 +15,17 @@ public class AuthController : ControllerBase
     private readonly AppDbContext _context;
     private readonly PasswordService _passwordService;
 
-    public AuthController(
+    private readonly IConfiguration _configuration;
+
+	public AuthController(
         AppDbContext context,
-        PasswordService passwordService)
-    {
+        PasswordService passwordService,
+        IConfiguration configuration)
+	{
         _context = context;
         _passwordService = passwordService;
-    }
+        _configuration = configuration;
+	}
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
@@ -55,8 +59,8 @@ public class AuthController : ControllerBase
         };
 
         var clave = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(
-                "CLAVE-TEMPORAL-NO-PARA-PRODUCCION"));
+           Encoding.UTF8.GetBytes(
+           _configuration["Jwt:Key"]!));
 
         var credenciales = new SigningCredentials(
             clave,
