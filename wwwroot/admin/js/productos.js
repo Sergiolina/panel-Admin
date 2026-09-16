@@ -256,13 +256,15 @@ const respuesta = await fetch(url, {
             body: JSON.stringify(producto)
         });
 
-        let datos;
+        const texto = await respuesta.text();
 
-        try {
-            datos = await respuesta.json();
-        } catch {
-            datos = await respuesta.text();
-        }
+	let datos;
+
+	try {
+    	datos = JSON.parse(texto);
+	} catch {
+    	datos = texto;
+	}
 
         if (!respuesta.ok) {
 
