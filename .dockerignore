@@ -1,0 +1,9 @@
+.git
+.gitignore
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+wwwroot/catalogo-demo/
+
