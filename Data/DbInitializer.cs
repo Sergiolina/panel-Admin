@@ -9,9 +9,9 @@ public static class DbInitializer
         AppDbContext context,
         PasswordService passwordService)
     {
-        await context.Database.MigrateAsync();
+	await context.Database.MigrateAsync();
 
-        if (await context.Usuarios.AnyAsync())
+	if (await context.Usuarios.AnyAsync())
         {
             return;
         }

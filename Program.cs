@@ -5,8 +5,9 @@ using panel_Admin.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SQLitePCL;
 
-SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
+raw.SetProvider(new SQLite3Provider_sqlite3());
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,14 +41,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
-
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<PasswordService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=panel-admin.db"));
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
