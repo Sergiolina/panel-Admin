@@ -17,7 +17,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("Catalogo", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins(
+    "https://sergiolina.github.io"
+)
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
