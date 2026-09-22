@@ -48,7 +48,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<PasswordService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=panel-admin.db"));
+    options.UseSqlite("Data Source=/data/panel-admin.db"));
 
 var app = builder.Build();
 
