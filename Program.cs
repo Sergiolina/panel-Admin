@@ -62,9 +62,9 @@ using (var scope = app.Services.CreateScope())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseAuthentication();
+app.UseCors("Catalogo")
 
-app.UseCors("Catalogo");
+app.UseAuthentication();
 
 app.UseAuthorization();
 
